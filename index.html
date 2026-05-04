@@ -1,154 +1,645 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biodata Mahasiswa</title>
-    <link rel="stylesheet" href="tema.css">
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ulfa Mailani</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #E23636;
+  --dark-red: #9B1B1B;
+  --blue: #1A3A6B;
+  --dark-blue: #0d1f3c;
+  --light-blue: #2563EB;
+  --black: #0a0a0a;
+  --white: #f8f8f8;
+  --cream: #fdf6ec;
+  --web: rgba(255,255,255,0.07);
+}
 
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--dark-blue);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* spiderweb SVG bg */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.03) 60px),
+    repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.03) 60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.web-svg {
+  position: fixed;
+  top: -60px; right: -60px;
+  width: 360px; height: 360px;
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.web-svg2 {
+  position: fixed;
+  bottom: -80px; left: -80px;
+  width: 400px; height: 400px;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+  transform: rotate(180deg);
+}
+
+/* PAGE LAYOUT */
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+/* ===== LEFT PANEL ===== */
+.left { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.hero-card {
+  background: var(--black);
+  border: 1.5px solid rgba(226,54,54,0.35);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-banner {
+  height: 90px;
+  background: var(--red);
+  position: relative;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-conic-gradient(rgba(0,0,0,0.15) 0% 25%, transparent 25% 50%);
+  background-size: 20px 20px;
+}
+
+.banner-title {
+  font-family: 'Bangers', cursive;
+  font-size: 28px;
+  letter-spacing: 3px;
+  color: #fff;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+  position: relative;
+  z-index: 1;
+}
+
+.avatar-section {
+  padding: 0 1.5rem 1.5rem;
+  text-align: center;
+}
+
+.avatar-ring {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  border: 3px solid var(--red);
+  padding: 3px;
+  margin: -50px auto 0.75rem;
+  background: var(--black);
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+.avatar-ring img {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-name {
+  font-family: 'Bangers', cursive;
+  font-size: 26px;
+  letter-spacing: 2px;
+  color: var(--white);
+  margin-bottom: 3px;
+}
+
+.hero-tag {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1rem;
+}
+
+.badge-row {
+  display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.badge {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.badge-red { background: rgba(226,54,54,0.18); color: #ff6b6b; border: 1px solid rgba(226,54,54,0.4); }
+.badge-blue { background: rgba(37,99,235,0.18); color: #93c5fd; border: 1px solid rgba(37,99,235,0.4); }
+.badge-white { background: rgba(255,255,255,0.08); color: #ccc; border: 1px solid rgba(255,255,255,0.15); }
+
+.divider { width: 40px; height: 2px; background: var(--red); margin: 0 auto 1rem; border-radius: 2px; }
+
+.info-list { text-align: left; }
+
+.info-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 6px 0;
+  border-bottom: 0.5px solid rgba(255,255,255,0.07);
+  font-size: 12px; gap: 8px;
+}
+
+.info-row:last-child { border-bottom: none; }
+.ilabel { color: var(--red); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0; }
+.ivalue { color: #ccc; text-align: right; word-break: break-all; font-size: 11.5px; }
+
+/* CONTACT CARD */
+.contact-card {
+  background: var(--red);
+  border-radius: 16px;
+  padding: 1.1rem 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-conic-gradient(rgba(0,0,0,0.1) 0% 25%, transparent 25% 50%);
+  background-size: 16px 16px;
+}
+
+.contact-title {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.7); margin-bottom: 0.65rem;
+  position: relative;
+}
+
+.contact-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11.5px; color: #fff; margin-bottom: 7px;
+  position: relative;
+}
+.contact-row:last-child { margin-bottom: 0; }
+
+.cdot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.6); flex-shrink: 0; }
+
+/* SKILLS CARD */
+.skills-card {
+  background: var(--black);
+  border: 1.5px solid rgba(37,99,235,0.3);
+  border-radius: 16px;
+  padding: 1.1rem 1.25rem;
+}
+
+.card-heading {
+  font-family: 'Bangers', cursive;
+  font-size: 16px; letter-spacing: 2px; color: var(--red);
+  margin-bottom: 0.75rem;
+}
+
+.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.stag {
+  font-size: 11px; font-weight: 500;
+  padding: 4px 12px; border-radius: 6px;
+  background: rgba(226,54,54,0.12);
+  color: #ff8080;
+  border: 1px solid rgba(226,54,54,0.25);
+  letter-spacing: 0.5px;
+}
+
+/* ===== RIGHT PANEL ===== */
+.right { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.panel {
+  background: var(--black);
+  border: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 1.5rem 1.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.panel-accent { border-color: rgba(226,54,54,0.3); }
+.panel-blue { border-color: rgba(37,99,235,0.3); }
+
+.panel-label {
+  font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); margin-bottom: 4px;
+}
+
+.panel-title {
+  font-family: 'Bangers', cursive;
+  font-size: 22px; letter-spacing: 2px; color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.panel-title span { color: var(--red); }
+
+.about-text { font-size: 13.5px; color: #aaa; line-height: 1.8; }
+
+/* HOBBIES */
+.hobby-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.htag {
+  padding: 6px 16px; border-radius: 8px; font-size: 12px; font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.htag-r { background: rgba(226,54,54,0.15); color: #ff8080; border: 1px solid rgba(226,54,54,0.3); }
+.htag-b { background: rgba(37,99,235,0.15); color: #93c5fd; border: 1px solid rgba(37,99,235,0.3); }
+
+/* GRID PANELS (2 cols) */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+
+/* LIST STYLE */
+.fancy-list { list-style: none; padding: 0; }
+.fancy-list li {
+  padding: 7px 0;
+  border-bottom: 0.5px solid rgba(255,255,255,0.06);
+  font-size: 13px; color: #bbb;
+  display: flex; align-items: center; gap: 8px;
+}
+.fancy-list li:last-child { border-bottom: none; }
+.fancy-list li::before {
+  content: '';
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--red); flex-shrink: 0;
+}
+.fancy-list li strong { color: var(--white); }
+.fancy-list li small { color: var(--red); font-size: 11px; display: block; }
+
+/* EDUCATION */
+.edu-list { list-style: none; padding: 0; }
+.edu-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0;
+  border-bottom: 0.5px solid rgba(255,255,255,0.06);
+}
+.edu-item:last-child { border-bottom: none; }
+.edu-num {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--red);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bangers', cursive; font-size: 14px; color: #fff;
+  flex-shrink: 0;
+}
+.edu-school { font-size: 13.5px; font-weight: 500; color: var(--white); }
+.edu-year { font-size: 11px; color: var(--red); margin-top: 2px; }
+
+/* PLAYLIST TABLE */
+.table-wrap { overflow-x: auto; }
+.playlist {
+  width: 100%; border-collapse: collapse; font-size: 12.5px;
+  table-layout: fixed;
+}
+.playlist thead tr { background: var(--red); }
+.playlist th {
+  padding: 8px 10px; text-align: left; color: #fff;
+  font-weight: 500; font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+}
+.playlist td {
+  padding: 7px 10px; border-bottom: 0.5px solid rgba(255,255,255,0.07);
+  color: #bbb;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.playlist tr:hover td { background: rgba(226,54,54,0.07); color: #fff; }
+
+/* PROJECT CARDS */
+.project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.pcard {
+  background: #111;
+  border: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 14px; overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.pcard:hover { border-color: var(--red); transform: translateY(-3px); }
+
+.pcard-img { width: 100%; height: 120px; object-fit: cover; display: block; }
+
+.pcard-body {
+  padding: 10px 12px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.pcard-title { font-size: 13px; font-weight: 500; color: var(--white); }
+.pcard-btn {
+  background: var(--red); color: #fff;
+  text-decoration: none; padding: 4px 12px; border-radius: 6px;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.5px;
+  transition: background 0.2s;
+}
+.pcard-btn:hover { background: var(--dark-red); }
+
+/* SOCIALS */
+.social-grid { display: flex; flex-direction: column; gap: 8px; }
+
+.social-link {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--white); text-decoration: none;
+  padding: 10px 14px; border-radius: 10px; font-size: 13px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.social-link:hover { border-color: var(--red); background: rgba(226,54,54,0.08); }
+.social-icon { font-size: 15px; }
+
+/* QUOTE */
+.quote-panel {
+  background: linear-gradient(135deg, #1a0a0a 0%, #0d1f3c 100%);
+  border: 1.5px solid rgba(226,54,54,0.4);
+  border-radius: 20px;
+  padding: 1.5rem 1.75rem;
+  position: relative; overflow: hidden;
+}
+.quote-mark {
+  font-family: 'Bangers', cursive; font-size: 60px;
+  color: rgba(226,54,54,0.2);
+  line-height: 1; margin-bottom: 0.5rem; display: block;
+}
+.quote-text {
+  font-size: 14px; color: #ccc; line-height: 1.75;
+  font-style: italic;
+}
+.quote-text em { color: var(--red); font-style: normal; font-weight: 500; }
+
+/* SPIDER LOGO */
+.spider-logo {
+  position: absolute; top: 12px; right: 14px;
+  width: 30px; height: 30px; opacity: 0.15;
+}
+
+/* RESPONSIVE */
+@media (max-width: 720px) {
+  .page { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  .grid2 { grid-template-columns: 1fr; }
+  .project-grid { grid-template-columns: 1fr; }
+  .web-svg, .web-svg2 { width: 220px; height: 220px; }
+}
+</style>
+</head>
 <body>
 
-<div class="container">
-    <img src="foto.png" alt="Foto">
+<!-- spiderweb decorations -->
+<svg class="web-svg" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="150" cy="150" r="140" stroke="white" stroke-width="0.8"/>
+  <circle cx="150" cy="150" r="110" stroke="white" stroke-width="0.8"/>
+  <circle cx="150" cy="150" r="80" stroke="white" stroke-width="0.8"/>
+  <circle cx="150" cy="150" r="50" stroke="white" stroke-width="0.8"/>
+  <circle cx="150" cy="150" r="20" stroke="white" stroke-width="0.8"/>
+  <line x1="150" y1="10" x2="150" y2="290" stroke="white" stroke-width="0.8"/>
+  <line x1="10" y1="150" x2="290" y2="150" stroke="white" stroke-width="0.8"/>
+  <line x1="51" y1="51" x2="249" y2="249" stroke="white" stroke-width="0.8"/>
+  <line x1="249" y1="51" x2="51" y2="249" stroke="white" stroke-width="0.8"/>
+  <line x1="10" y1="100" x2="290" y2="200" stroke="white" stroke-width="0.4"/>
+  <line x1="100" y1="10" x2="200" y2="290" stroke="white" stroke-width="0.4"/>
+  <line x1="10" y1="200" x2="290" y2="100" stroke="white" stroke-width="0.4"/>
+  <line x1="200" y1="10" x2="100" y2="290" stroke="white" stroke-width="0.4"/>
+</svg>
 
-    <h1>Ulfa Mailani</h1>
-    <p class="job">Furab Lovers</p>
+<svg class="web-svg2" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="150" cy="150" r="140" stroke="white" stroke-width="0.8"/>
+  <circle cx="150" cy="150" r="110" stroke="white" stroke-width="0.8"/>
+  <circle cx="150" cy="150" r="80" stroke="white" stroke-width="0.8"/>
+  <circle cx="150" cy="150" r="50" stroke="white" stroke-width="0.8"/>
+  <circle cx="150" cy="150" r="20" stroke="white" stroke-width="0.8"/>
+  <line x1="150" y1="10" x2="150" y2="290" stroke="white" stroke-width="0.8"/>
+  <line x1="10" y1="150" x2="290" y2="150" stroke="white" stroke-width="0.8"/>
+  <line x1="51" y1="51" x2="249" y2="249" stroke="white" stroke-width="0.8"/>
+  <line x1="249" y1="51" x2="51" y2="249" stroke="white" stroke-width="0.8"/>
+</svg>
 
-    <div class="info">
-        <p><strong>TTL:</strong> Medan, 18 Okt 2005</p>
-        <p><strong>JK:</strong> Perempuan</p>
-        <p><strong>Alamat:</strong> Sigli</p>
-        <p><strong>Email:</strong> ulfamailani2018@gmail.com</p>
-        <p><strong>HP:</strong> 0895417801373</p>
-    </div>
+<div class="page">
 
-    <div class="section">
-        <h3>About</h3>
-        <p>
-            I enjoy learning new things, especially in technology and design.
-            I am active in communities and love exploring creative ideas.
-        </p>
-    </div>
+  <!-- ===== LEFT ===== -->
+  <div class="left">
 
-    <div class="section">
-        <h3>Hobbies</h3>
-        <div class="tags">
-            <span class="tag">Coding</span>
-            <span class="tag">Watching</span>
-            <span class="tag">Music</span>
-            <span class="tag">Travel</span>
+    <div class="hero-card">
+      <div class="hero-banner">
+        <span class="banner-title">ULFA MAILANI</span>
+      </div>
+      <div class="avatar-section">
+        <div class="avatar-ring">
+          <img src="foto.png" alt="Ulfa Mailani">
         </div>
+        <div class="hero-name">Ulfa Mailani</div>
+        <div class="hero-tag">Furab Lovers</div>
+        <div class="badge-row">
+          <span class="badge badge-red">HTML</span>
+          <span class="badge badge-blue">CSS</span>
+          <span class="badge badge-white">UI Design</span>
+        </div>
+        <div class="divider"></div>
+        <div class="info-list">
+          <div class="info-row">
+            <span class="ilabel">TTL</span>
+            <span class="ivalue">Medan, 18 Okt 2005</span>
+          </div>
+          <div class="info-row">
+            <span class="ilabel">JK</span>
+            <span class="ivalue">Perempuan</span>
+          </div>
+          <div class="info-row">
+            <span class="ilabel">Alamat</span>
+            <span class="ivalue">Sigli</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="section playlist-box">
-        <h3>Education</h3>
-        <ul class="list">
-            <li><strong>SD Negeri Pineung</strong><br><small>2012 - 2018</small></li>
-            <li><strong>MTsN 5 Pidie</strong><br><small>2018 - 2021</small></li>
-            <li><strong>MAN 1 Pidie</strong><br><small>2021 - 2024</small></li>
+    <div class="contact-card">
+      <div class="contact-title">Kontak</div>
+      <div class="contact-row"><div class="cdot"></div>ulfamailani2018@gmail.com</div>
+      <div class="contact-row"><div class="cdot"></div>0895417801373</div>
+    </div>
+
+    <div class="skills-card">
+      <div class="card-heading">Skills</div>
+      <div class="skill-tags">
+        <span class="stag">HTML</span>
+        <span class="stag">CSS</span>
+        <span class="stag">PHP</span>
+        <span class="stag">UI Design</span>
+        <span class="stag">Editing</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== RIGHT ===== -->
+  <div class="right">
+
+    <div class="panel panel-accent">
+      <div class="panel-label">Tentang saya</div>
+      <div class="panel-title">About <span>Me</span></div>
+      <div class="about-text">I enjoy learning new things, especially in technology and design. I am active in communities and love exploring creative ideas.</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-label">Minat & Hobi</div>
+      <div class="panel-title">Hobbies</div>
+      <div class="hobby-tags">
+        <span class="htag htag-r">Coding</span>
+        <span class="htag htag-b">Watching</span>
+        <span class="htag htag-r">Music</span>
+        <span class="htag htag-b">Travel</span>
+      </div>
+    </div>
+
+    <div class="panel panel-blue">
+      <div class="panel-label">Riwayat Pendidikan</div>
+      <div class="panel-title">Education</div>
+      <ul class="edu-list">
+        <li class="edu-item">
+          <div class="edu-num">1</div>
+          <div><div class="edu-school">SD Negeri Pineung</div><div class="edu-year">2012 – 2018</div></div>
+        </li>
+        <li class="edu-item">
+          <div class="edu-num">2</div>
+          <div><div class="edu-school">MTsN 5 Pidie</div><div class="edu-year">2018 – 2021</div></div>
+        </li>
+        <li class="edu-item">
+          <div class="edu-num">3</div>
+          <div><div class="edu-school">MAN 1 Pidie</div><div class="edu-year">2021 – 2024</div></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <div class="panel-label">Musik Favorit</div>
+      <div class="panel-title">Playlist</div>
+      <div class="table-wrap">
+        <table class="playlist">
+          <thead>
+            <tr>
+              <th style="width:30px">No</th>
+              <th>Lagu</th>
+              <th>Artist</th>
+              <th style="width:55px">Durasi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>The One That Got Away</td><td>Katy Perry</td><td>4:50</td></tr>
+            <tr><td>2</td><td>Sesi Potret</td><td>Enau ft. Ari Lesmana</td><td>5:06</td></tr>
+            <tr><td>3</td><td>Perfect</td><td>Ed Sheeran</td><td>4:23</td></tr>
+            <tr><td>4</td><td>Photograph</td><td>Ed Sheeran</td><td>4:10</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="panel">
+        <div class="panel-label">Kuliner</div>
+        <div class="panel-title">Favorite Foods</div>
+        <ul class="fancy-list">
+          <li>Ayam Bakar</li>
+          <li>Mie Ayam</li>
+          <li>Dimsum Mentai</li>
+          <li>Nasi Goreng Ayah</li>
         </ul>
-    </div>
+      </div>
 
-    <div class="section">
-        <h3>Playlist</h3>
-        <div class="table-wrapper">
-            <table class="playlist">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Lagu</th>
-                        <th>Artist</th>
-                        <th>Durasi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>1</td><td>The One That Got Away</td><td>Katy Perry</td><td>4:50</td></tr>
-                    <tr><td>2</td><td>Sesi Potret</td><td>Enau ft. Ari Lesmana</td><td>5:06</td></tr>
-                    <tr><td>3</td><td>Perfect</td><td>Ed Sheeran</td><td>4:23</td></tr>
-                    <tr><td>4</td><td>Photograph</td><td>Ed Sheeran</td><td>4:10</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="section playlist-box">
-        <h3>Favorite Foods</h3>
-        <ul class="list">
-            <li>Ayam Bakar</li>
-            <li>Mie Ayam</li>
-            <li>Dimsum Mentai</li>
-            <li>Nasi Goreng Ayah</li>
+      <div class="panel">
+        <div class="panel-label">Animasi</div>
+        <div class="panel-title">Favorite Anime</div>
+        <ul class="fancy-list">
+          <li>One Piece</li>
+          <li>Attack on Titan</li>
+          <li>Hunter x Hunter</li>
+          <li>SK8 the Infinity</li>
         </ul>
+      </div>
     </div>
 
-    <div class="section playlist-box">
-        <h3>Favorite Movies</h3>
-        <ul class="list">
-            <li>The Amazing Spider-Man (2012)</li>
-            <li>Kimetsu no Yaiba: Infinity Castle (2025)</li>
-            <li>Inception (2010)</li>
-            <li>Parasite (2019)</li>
-            <li>The Batman (2022)</li>
-        </ul>
+    <div class="panel panel-accent">
+      <div class="panel-label">Sinema</div>
+      <div class="panel-title">Favorite Movies</div>
+      <ul class="fancy-list">
+        <li>The Amazing Spider-Man (2012)</li>
+        <li>Kimetsu no Yaiba: Infinity Castle (2025)</li>
+        <li>Inception (2010)</li>
+        <li>Parasite (2019)</li>
+        <li>The Batman (2022)</li>
+      </ul>
     </div>
 
-    <div class="section playlist-box">
-        <h3>Favorite Anime</h3>
-        <ul class="list">
-            <li>One Piece</li>
-            <li>Attack on Titan</li>
-            <li>Hunter x Hunter</li>
-            <li>SK8 the Infinity</li>
-        </ul>
-    </div>
-
-    <div class="section playlist-box">
-        <h3>Skills</h3>
-        <div class="tags">
-            <span class="tag">HTML</span>
-            <span class="tag">CSS</span>
-            <span class="tag">PHP</span>
-            <span class="tag">UI Design</span>
-            <span class="tag">Editing</span>
+    <div class="panel">
+      <div class="panel-label">Karya</div>
+      <div class="panel-title">My <span>Projects</span></div>
+      <div class="project-grid">
+        <div class="pcard">
+          <img src="project1.png" class="pcard-img" alt="Pinkflix">
+          <div class="pcard-body">
+            <span class="pcard-title">Pinkflix</span>
+            <a href="https://ulfamailani.github.io/PinkFlik/" target="_blank" class="pcard-btn">Open</a>
+          </div>
         </div>
-    </div>
-
-   <div class="section">
-    <h3>My Projects</h3>
-
-    <div class="project-card">
-        <img src="project1.png" class="project-img" onerror="this.style.display='none'">
-        <div class="project-body">
-            <p class="project-title">Pinkflix</p>
-            <a href="https://ulfamailani.github.io/PinkFlik/" target="_blank" class="btn">🔗 Open</a>
+        <div class="pcard">
+          <img src="project2.png" class="pcard-img" alt="Bank Sampah Desa">
+          <div class="pcard-body">
+            <span class="pcard-title">Bank Sampah</span>
+            <a href="#" class="pcard-btn">Open</a>
+          </div>
         </div>
+      </div>
     </div>
 
-    <div class="project-card">
-        <img src="project2.png" class="project-img" onerror="this.style.display='none'">
-        <div class="project-body">
-            <p class="project-title">Bank Sampah Desa</p>
-            <a href="https://ulfamailani.github.io/BankSampahDesa/" target="_blank" class="btn">🔗 Open</a>
-        </div>
-    </div>
-</div>
-
-    <div class="section">
-        <h3>Social Media</h3>
-        <div class="socials">
-            <a href="https://www.instagram.com/ulfamailanii" target="_blank">📸 Instagram</a>
-            <a href="https://www.tiktok.com/@posaidt" target="_blank">🎶 TikTok</a>
-        </div>
+    <div class="panel panel-blue">
+      <div class="panel-label">Media Sosial</div>
+      <div class="panel-title">Social Media</div>
+      <div class="social-grid">
+        <a href="https://www.instagram.com/ulfamailanii" target="_blank" class="social-link">
+          <span class="social-icon">📸</span> Instagram — @ulfamailanii
+        </a>
+        <a href="https://www.tiktok.com/@posaidt" target="_blank" class="social-link">
+          <span class="social-icon">🎶</span> TikTok — @posaidt
+        </a>
+      </div>
     </div>
 
-    <div class="section playlist-box">
-        <h3>Quotes</h3>
-        <p>
-            Enjoy to proces, jalani aja sebaik mungkin. (Inna ma'al usri yusra)
-        </p>
+    <div class="quote-panel">
+      <span class="quote-mark">"</span>
+      <div class="quote-text">
+        Enjoy the process, jalani aja sebaik mungkin.<br>
+        <em>Inna ma'al usri yusra.</em>
+      </div>
     </div>
 
+  </div>
 </div>
 
 </body>
